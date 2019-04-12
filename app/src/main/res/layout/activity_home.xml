@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".HomeActivity">
+
+    <LinearLayout
+        android:id="@+id/createMatchButton"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginBottom="20dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/create_match"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Create Match"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/matchScoresButton"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginBottom="40dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/show_scores"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Match Scores"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

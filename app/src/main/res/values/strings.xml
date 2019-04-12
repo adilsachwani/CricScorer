@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CricApp</string>
+    <string name="app_name">CricScorer</string>
     <string name="oneRun">1</string>
     <string name="twoRun">2</string>
     <string name="threeRun">3</string>

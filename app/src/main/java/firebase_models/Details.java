@@ -6,12 +6,14 @@ public class Details {
     private int totalPlayers;
     private String teamOne;
     private String teamTwo;
+    private boolean status;
 
-    public Details(int totalOvers, int totalPlayers, String teamOne, String teamTwo) {
+    public Details(int totalOvers, int totalPlayers, String teamOne, String teamTwo, boolean status) {
         this.totalOvers = totalOvers;
         this.totalPlayers = totalPlayers;
         this.teamOne = teamOne;
         this.teamTwo = teamTwo;
+        this.status = status;
     }
 
     public Details(){
@@ -50,4 +52,11 @@ public class Details {
         this.teamTwo = teamTwo;
     }
 
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
 }
