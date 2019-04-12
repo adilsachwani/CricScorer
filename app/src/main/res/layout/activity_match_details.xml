@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MatchDetailsActivity"
+    android:gravity="center">
+
+    <EditText
+        android:id="@+id/overEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter total overs"
+        android:layout_marginTop="@dimen/edit_text_margin"
+        android:layout_marginLeft="@dimen/edit_text_margin"
+        android:layout_marginRight="@dimen/edit_text_margin"
+        android:layout_marginBottom="@dimen/edit_text_margin" />
+
+    <EditText
+        android:id="@+id/playersEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter total players"
+        android:layout_margin="@dimen/edit_text_margin"/>
+
+    <EditText
+        android:id="@+id/teamOneEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter team ond name"
+        android:layout_margin="@dimen/edit_text_margin"/>
+
+    <EditText
+        android:id="@+id/teamTwoEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter team two name"
+        android:layout_margin="@dimen/edit_text_margin"/>
+
+    <Button
+        android:id="@+id/createMatchButton"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:text="Create Match"
+        android:textSize="25sp"
+        android:layout_margin="@dimen/edit_text_margin"/>
+
+
+
+</LinearLayout>
