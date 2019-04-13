@@ -8,7 +8,7 @@ import android.widget.LinearLayout;
 
 public class HomeActivity extends AppCompatActivity {
 
-    LinearLayout createMatchButton;
+    LinearLayout createMatchButton, matchScoreButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,11 +16,20 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         createMatchButton = findViewById(R.id.createMatchButton);
+        matchScoreButton = findViewById(R.id.matchScoresButton);
 
         createMatchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this,MatchDetailsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        matchScoreButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this,MatchesListActivity.class);
                 startActivity(intent);
             }
         });

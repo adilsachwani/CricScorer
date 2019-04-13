@@ -1,4 +1,4 @@
-package Services;
+package services;
 
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;

@@ -23,26 +23,31 @@ import java.util.List;
 import firebase_models.Details;
 import firebase_models.Player;
 
-public class TeamActivity extends AppCompatActivity {
+public class TeamDetailsActivity extends AppCompatActivity {
 
-    String match = "match1";
     LinearLayout linearLayout;
     TextView teamNameText;
     Button nextButton;
     List<EditText> editTextsList = new ArrayList<>();
     boolean teamDone = false;
     String team = "team1";
+    String match;
 
-    DatabaseReference matchReference = FirebaseDatabase.getInstance().getReference().child(match);
+    DatabaseReference matchReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_team);
+        setContentView(R.layout.activity_team_details);
 
         linearLayout = findViewById(R.id.playersLayout);
         teamNameText = findViewById(R.id.teamNameText);
         nextButton = findViewById(R.id.nextButton);
+
+        match = getIntent().getStringExtra("match_no");
+        Log.d("adil" ,"match: " +match);
+
+        matchReference = FirebaseDatabase.getInstance().getReference().child("matches").child(match);
 
         matchReference.child("details").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -69,7 +74,8 @@ public class TeamActivity extends AppCompatActivity {
                         }
 
                         if(teamDone){
-                            Intent intent = new Intent(TeamActivity.this, MatchScoreActivity.class);
+                            Intent intent = new Intent(TeamDetailsActivity.this, MatchScorerActivity.class);
+                            intent.putExtra("match_no",match);
                             startActivity(intent);
                         }
                         else {
@@ -104,7 +110,7 @@ public class TeamActivity extends AppCompatActivity {
 
         for(int i=0; i<totalPlayers; i++){
 
-            EditText playerEditText = new EditText(TeamActivity.this);
+            EditText playerEditText = new EditText(TeamDetailsActivity.this);
 
             playerEditText.setHint("Enter name " + (i+1));
 

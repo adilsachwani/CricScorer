@@ -17,21 +17,23 @@
         android:layout_marginTop="@dimen/edit_text_margin"
         android:layout_marginLeft="@dimen/edit_text_margin"
         android:layout_marginRight="@dimen/edit_text_margin"
-        android:layout_marginBottom="@dimen/edit_text_margin" />
+        android:layout_marginBottom="@dimen/edit_text_margin"
+        android:inputType="number"/>
 
     <EditText
         android:id="@+id/playersEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter total players"
-        android:layout_margin="@dimen/edit_text_margin"/>
+        android:layout_margin="@dimen/edit_text_margin"
+        android:inputType="number"/>
 
     <EditText
         android:id="@+id/teamOneEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter team ond name"
-        android:layout_margin="@dimen/edit_text_margin"/>
+        android:hint="Enter team one name"
+        android:layout_margin="@dimen/edit_text_margin" />
 
     <EditText
         android:id="@+id/teamTwoEditText"

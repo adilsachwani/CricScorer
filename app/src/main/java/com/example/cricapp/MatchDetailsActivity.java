@@ -7,12 +7,9 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -31,25 +28,12 @@ public class MatchDetailsActivity extends AppCompatActivity {
     EditText totalOversEditText, totalPlayerEditText, teamOneEditText, teamTwoEditText;
     Button createMatchButton;
     String match;
+    int total_matches;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_match_details);
-
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            NotificationChannel channel = new NotificationChannel("MyNotifications","MyNotifications", NotificationManager.IMPORTANCE_DEFAULT);
-            NotificationManager manager = getSystemService(NotificationManager.class);
-            manager.createNotificationChannel(channel);
-        }
-
-        FirebaseMessaging.getInstance().subscribeToTopic("all").addOnCompleteListener(new OnCompleteListener<Void>() {
-
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-
-            }
-        });
 
         totalOversEditText = findViewById(R.id.overEditText);
         totalPlayerEditText = findViewById(R.id.playersEditText);
@@ -57,12 +41,13 @@ public class MatchDetailsActivity extends AppCompatActivity {
         teamTwoEditText = findViewById(R.id.teamTwoEditText);
         createMatchButton = findViewById(R.id.createMatchButton);
 
+        cloudMessagingFunction();
+
         dbReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                int total_matches = dataSnapshot.child("total_matches").getValue(Integer.class) + 1;
+                total_matches = dataSnapshot.child("total_matches").getValue(Integer.class) + 1;
                 match = "match" + total_matches;
-                dataSnapshot.child("total_matches").getRef().setValue(total_matches);
             }
 
             @Override
@@ -80,16 +65,32 @@ public class MatchDetailsActivity extends AppCompatActivity {
                 String teamOne = teamOneEditText.getText().toString();
                 String teamTwo = teamTwoEditText.getText().toString();
 
-                dbReference.child(match).child("details").setValue(new Details(overs,players,teamOne,teamTwo,true));
+                dbReference.child("total_matches").setValue(total_matches);
+                dbReference.child("matches").child(match).child("details").setValue(new Details(overs,players,teamOne,teamTwo,true));
 
-                Intent intent = new Intent(MatchDetailsActivity.this, TeamActivity.class);
+                Intent intent = new Intent(MatchDetailsActivity.this, TeamDetailsActivity.class);
+                intent.putExtra("match_no",match);
                 startActivity(intent);
 
             }
         });
 
+    }
 
+    void cloudMessagingFunction(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            NotificationChannel channel = new NotificationChannel("MyNotifications","MyNotifications", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
 
+        FirebaseMessaging.getInstance().subscribeToTopic("all").addOnCompleteListener(new OnCompleteListener<Void>() {
+
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+
+            }
+        });
     }
 
 }

@@ -15,18 +15,20 @@ import com.google.firebase.database.ValueEventListener;
 
 import firebase_models.Score;
 
-public class MatchScoreActivity extends AppCompatActivity {
+public class MatchScorerActivity extends AppCompatActivity {
 
-    String match = "match1";
-
-    DatabaseReference matchReference = FirebaseDatabase.getInstance().getReference().child(match);
+    DatabaseReference matchReference;
     Button oneButton, twoButton, threeButton, fourButton, sixButton, outButton, wideButton, noBallButton;
     TextView scoreText, oversText;
+    String match_no;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_match_score);
+        setContentView(R.layout.activity_match_scorer);
+
+        match_no = getIntent().getStringExtra("match_no");
+        matchReference = FirebaseDatabase.getInstance().getReference().child("matches").child(match_no);
 
         oneButton = findViewById(R.id.oneButton);
         twoButton = findViewById(R.id.twoButton);
