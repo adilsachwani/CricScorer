@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -32,6 +33,8 @@ public class TeamDetailsActivity extends AppCompatActivity {
     boolean teamDone = false;
     String team = "team1";
     String match;
+    TextView toolbarText;
+    ImageView toolbarBackButton;
 
     DatabaseReference matchReference;
 
@@ -41,7 +44,6 @@ public class TeamDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_team_details);
 
         linearLayout = findViewById(R.id.playersLayout);
-        teamNameText = findViewById(R.id.teamNameText);
         nextButton = findViewById(R.id.nextButton);
 
         match = getIntent().getStringExtra("match_no");
@@ -55,7 +57,7 @@ public class TeamDetailsActivity extends AppCompatActivity {
 
                 final Details d = dataSnapshot.getValue(Details.class);
 
-                displayTeamName(d.getTeamOne());
+                setUpToolbar(d.getTeamOne() + " Squad");
                 populateFields(d.getTotalPlayers());
 
                 nextButton.setOnClickListener(new View.OnClickListener() {
@@ -80,7 +82,7 @@ public class TeamDetailsActivity extends AppCompatActivity {
                         }
                         else {
                             teamDone = true;
-                            displayTeamName(d.getTeamTwo());
+                            setUpToolbar(d.getTeamTwo() + " Squad");
                             team = "team2";
 
                             for(int i=0; i<d.getTotalPlayers(); i++){
@@ -102,11 +104,11 @@ public class TeamDetailsActivity extends AppCompatActivity {
         });
     }
 
-    void displayTeamName(String teamName){
+    private void displayTeamName(String teamName){
         teamNameText.setText(teamName);
     }
 
-    void populateFields(int totalPlayers){
+    private void populateFields(int totalPlayers){
 
         for(int i=0; i<totalPlayers; i++){
 
@@ -119,7 +121,7 @@ public class TeamDetailsActivity extends AppCompatActivity {
                     LinearLayout.LayoutParams.WRAP_CONTENT
             );
 
-            lp.setMargins(40,10,40,10);
+            lp.setMargins(0,0,0,20);
 
             playerEditText.setLayoutParams(lp);
             editTextsList.add(playerEditText);
@@ -127,6 +129,21 @@ public class TeamDetailsActivity extends AppCompatActivity {
             linearLayout.addView(playerEditText);
         }
 
+
+    }
+
+    private void setUpToolbar(String title){
+        toolbarText = findViewById(R.id.toolrbarText);
+        toolbarBackButton = findViewById(R.id.toolbarButton);
+
+        toolbarText.setText(title);
+
+        toolbarBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
     }
 

@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -29,19 +31,21 @@ public class MatchDetailsActivity extends AppCompatActivity {
     Button createMatchButton;
     String match;
     int total_matches;
+    TextView toolbarText;
+    ImageView toolbarBackButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_match_details);
 
+        setUpToolbar("Match Details");
+
         totalOversEditText = findViewById(R.id.overEditText);
         totalPlayerEditText = findViewById(R.id.playersEditText);
         teamOneEditText = findViewById(R.id.teamOneEditText);
         teamTwoEditText = findViewById(R.id.teamTwoEditText);
         createMatchButton = findViewById(R.id.createMatchButton);
-
-        cloudMessagingFunction();
 
         dbReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -77,20 +81,19 @@ public class MatchDetailsActivity extends AppCompatActivity {
 
     }
 
-    void cloudMessagingFunction(){
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            NotificationChannel channel = new NotificationChannel("MyNotifications","MyNotifications", NotificationManager.IMPORTANCE_DEFAULT);
-            NotificationManager manager = getSystemService(NotificationManager.class);
-            manager.createNotificationChannel(channel);
-        }
+    private void setUpToolbar(String title){
+        toolbarText = findViewById(R.id.toolrbarText);
+        toolbarBackButton = findViewById(R.id.toolbarButton);
 
-        FirebaseMessaging.getInstance().subscribeToTopic("all").addOnCompleteListener(new OnCompleteListener<Void>() {
+        toolbarText.setText(title);
 
+        toolbarBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onComplete(@NonNull Task<Void> task) {
-
+            public void onClick(View v) {
+                onBackPressed();
             }
         });
+
     }
 
 }

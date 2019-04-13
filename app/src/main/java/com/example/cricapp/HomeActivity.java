@@ -1,10 +1,18 @@
 package com.example.cricapp;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
+import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -14,6 +22,8 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        cloudMessagingFunction();
 
         createMatchButton = findViewById(R.id.createMatchButton);
         matchScoreButton = findViewById(R.id.matchScoresButton);
@@ -35,4 +45,21 @@ public class HomeActivity extends AppCompatActivity {
         });
 
     }
+
+    void cloudMessagingFunction(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            NotificationChannel channel = new NotificationChannel("MyNotifications","MyNotifications", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
+
+        FirebaseMessaging.getInstance().subscribeToTopic("all").addOnCompleteListener(new OnCompleteListener<Void>() {
+
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+
+            }
+        });
+    }
+
 }

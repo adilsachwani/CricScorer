@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="edit_text_margin">20dp</dimen>
+    <dimen name="edit_text_margin_hr">40dp</dimen>
+    <dimen name="edit_text_margin_vr">20dp</dimen>
 </resources>
