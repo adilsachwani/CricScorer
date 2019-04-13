@@ -7,8 +7,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_vertical"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="15dp">
 
         <ImageView
@@ -18,13 +17,14 @@
             android:src="@drawable/back_button_24dp" />
 
         <TextView
-            android:text="Match Scores"
+            android:text="Match Scorer"
             android:id="@+id/toolrbarText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="14sp"
             android:textColor="@color/bgColor"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:textAllCaps="true"/>
 
     </RelativeLayout>
 
